@@ -33,17 +33,8 @@
                                     <action selector="onSegmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="JcI-ce-ERY"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Running inference..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17U-qz-GbL">
-                                <rect key="frame" x="20" y="629" width="374" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="MEu-g7-B0i"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hG2-lt-A34">
-                                <rect key="frame" x="0.0" y="647" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="647" width="414" height="21"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legend: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOP-Qf-RzQ">
                                         <rect key="frame" x="20" y="0.0" width="66" height="21"/>
@@ -53,7 +44,7 @@
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="9Ta-y3-6G1"/>
+                                    <constraint firstAttribute="height" constant="21" id="9Ta-y3-6G1"/>
                                     <constraint firstItem="dOP-Qf-RzQ" firstAttribute="leading" secondItem="ogk-JI-sy4" secondAttribute="leading" constant="20" id="Djk-rN-gLo"/>
                                     <constraint firstItem="dOP-Qf-RzQ" firstAttribute="top" secondItem="ogk-JI-sy4" secondAttribute="top" id="FaV-c7-mGt"/>
                                     <constraint firstItem="dOP-Qf-RzQ" firstAttribute="trailing" secondItem="ogk-JI-sy4" secondAttribute="trailing" id="ZCP-sn-nt3"/>
@@ -61,20 +52,42 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="ogk-JI-sy4"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="da7-TV-cCs"/>
                             </scrollView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9cS-hu-7eB">
+                                <rect key="frame" x="345" y="602" width="51" height="31"/>
+                                <connections>
+                                    <action selector="onSwitchSegmentation:" destination="BYZ-38-t0r" eventType="valueChanged" id="icD-hY-NpM"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show confidence mask" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWI-Mm-SWj">
+                                <rect key="frame" x="20" y="607" width="176.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Running inference..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PY-A1-wxr">
+                                <rect key="frame" x="20" y="688" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="hG2-lt-A34" secondAttribute="trailing" id="73n-46-iuY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3PY-A1-wxr" secondAttribute="bottom" constant="153" id="1Wh-Wn-Q65"/>
+                            <constraint firstItem="hG2-lt-A34" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="73n-46-iuY"/>
                             <constraint firstItem="hG2-lt-A34" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="88S-qi-JWO"/>
+                            <constraint firstItem="MWI-Mm-SWj" firstAttribute="top" secondItem="boY-73-TPb" secondAttribute="bottom" constant="18" id="BJ2-uV-tZ8"/>
                             <constraint firstItem="0ds-v0-WYR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Bij-3d-MPv"/>
+                            <constraint firstItem="3PY-A1-wxr" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" constant="-20" id="IpS-NC-pDE"/>
                             <constraint firstItem="0ds-v0-WYR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Lna-af-YOn"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="17U-qz-GbL" secondAttribute="trailing" constant="20" id="QJL-2n-zG4"/>
-                            <constraint firstAttribute="trailing" secondItem="0ds-v0-WYR" secondAttribute="trailing" id="QeV-Qf-1rB"/>
-                            <constraint firstItem="hG2-lt-A34" firstAttribute="top" secondItem="17U-qz-GbL" secondAttribute="bottom" constant="20" id="Y7l-py-Bmi"/>
+                            <constraint firstItem="0ds-v0-WYR" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="QeV-Qf-1rB"/>
+                            <constraint firstItem="MWI-Mm-SWj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="RL0-Wc-ERR"/>
+                            <constraint firstItem="9cS-hu-7eB" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" constant="-20" id="eL8-Uo-eXw"/>
                             <constraint firstItem="boY-73-TPb" firstAttribute="top" secondItem="0ds-v0-WYR" secondAttribute="bottom" constant="30" id="eOe-IJ-1BA"/>
-                            <constraint firstItem="17U-qz-GbL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="g7U-R5-HcL"/>
-                            <constraint firstItem="17U-qz-GbL" firstAttribute="top" secondItem="boY-73-TPb" secondAttribute="bottom" constant="40" id="mnv-Dy-vP8"/>
+                            <constraint firstItem="3PY-A1-wxr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="fII-zI-uTY"/>
+                            <constraint firstItem="hG2-lt-A34" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" constant="-220" id="nAa-jA-zG1"/>
+                            <constraint firstItem="9cS-hu-7eB" firstAttribute="top" secondItem="boY-73-TPb" secondAttribute="bottom" constant="13" id="pTI-hQ-vOc"/>
                             <constraint firstItem="boY-73-TPb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uyY-b7-XDs"/>
                         </constraints>
                     </view>
@@ -94,7 +107,8 @@
                         <outlet property="imageView" destination="0ds-v0-WYR" id="Ln2-ev-8ff"/>
                         <outlet property="legendLabel" destination="dOP-Qf-RzQ" id="u5P-h9-aO4"/>
                         <outlet property="photoCameraButton" destination="PQi-Qi-i6K" id="6eQ-05-g1c"/>
-                        <outlet property="segmentationStatusLabel" destination="17U-qz-GbL" id="cvH-RC-8xO"/>
+                        <outlet property="segmentationStatusLabel" destination="3PY-A1-wxr" id="9b9-39-X8q"/>
+                        <outlet property="segmentationSwitch" destination="9cS-hu-7eB" id="Mqa-A3-YZ4"/>
                         <outlet property="segmentedControl" destination="boY-73-TPb" id="gtm-PJ-jdd"/>
                     </connections>
                 </viewController>

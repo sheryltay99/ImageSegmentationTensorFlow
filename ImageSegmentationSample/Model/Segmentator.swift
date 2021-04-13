@@ -91,6 +91,8 @@ class Segmentator {
     }
     
     // MARK: Segmentation
+    
+    // running segmentation to get default mask and confidence mask
     public func runSegmentation(image: UIImage, completion: @escaping (Result<SegmentationResults, SegmentationError>) -> Void) {
         guard let imageData = image.scaledData(with: CGSize(width: inputImageWidth, height: inputImageHeight),
                                                byteCount: self.batchSize * self.inputImageWidth * self.inputImageHeight * self.inputPixelSize,
@@ -99,7 +101,7 @@ class Segmentator {
             print("Failed to convert image to data")
             return
         }
-        
+
         let outputTensor: Tensor
         //copy image data to interpreter input, run inference and get output tensor.
         do {
@@ -112,7 +114,8 @@ class Segmentator {
             return
         }
         let parsedOutput = parseOutput(outputTensor: outputTensor)
-        
+
+        // Generating default segmentation and overlay images.
         guard let segmentationImage = imageFromSRGBColorArray(pixels: parsedOutput.segmentationPixelColour, width: outputImageWidth, height: outputImageHeight),
               let overlayImage = image.overlayWithImage(image: segmentationImage, alpha: 0.5)
         else {
@@ -120,56 +123,113 @@ class Segmentator {
             print("Failed to convert pixel data to image")
             return
         }
-        
         let colourLegend = classListToColorLegend(classList: parsedOutput.classList)
-        completion(.success(SegmentationResults(originalImage: image, segmentedImage: segmentationImage, overlayImage: overlayImage, colourLegend: colourLegend)))
+
+        // Generating second segmentation and overlay images.
+        guard let confidenceSegmentationImage = imageFromSRGBColorArray(pixels: parsedOutput.confidenceSegmentationPixelColour, width: outputImageWidth, height: outputImageHeight)
+        else {
+            completion(.failure(.invalidPixelData))
+            print("Failed to convert pixel data to image")
+            return
+        }
+        let confidenceColourLegend = confidenceClassListToColorLegend(classList: parsedOutput.confidenceClassList)
+
+        completion(.success(SegmentationResults(originalImage: image,
+                                                segmentedImage: segmentationImage,
+                                                overlayImage: overlayImage,
+                                                colourLegend: colourLegend,
+                                                confidenceSegmentedImage: confidenceSegmentationImage,
+                                                confidenceColourLegend: confidenceColourLegend)))
     }
     
-    /// Converting output tensor to segmentation map and get colour for each pixel.
-    private func parseOutput(outputTensor: Tensor) -> (segmentationMap: [[Int]], segmentationPixelColour: [UInt32], classList: Set<Int>) {
+    
+    /// Generating confidence maps
+    private func parseOutput(outputTensor: Tensor) -> (segmentationMap: [[Int]],
+                                                       segmentationPixelColour: [UInt32],
+                                                       classList: Set<Int>,
+                                                       confidenceSegmentationMap: [[Int]],
+                                                       confidenceSegmentationPixelColour: [UInt32],
+                                                       confidenceClassList: Set<Int>) {
         // initialising data structures
         var segmentationMap = [[Int]](repeating: [Int](repeating: 0, count: self.outputImageHeight),
                                     count: self.outputImageWidth)
         var segmentationImagePixels = [UInt32](
             repeating: 0, count: self.outputImageHeight * self.outputImageWidth)
         var classList = Set<Int>()
-        
+        var confidenceSegmentationMap = [[Int]](repeating: [Int](repeating: 0, count: self.outputImageHeight),
+                                    count: self.outputImageWidth)
+        var confidenceSegmentationImagePixels = [UInt32](
+            repeating: 0, count: self.outputImageHeight * self.outputImageWidth)
+        var confidenceClassList = Set<Int>()
+
         let outputArray = outputTensor.data.toArray(type: Float32.self)
-        
+
         var maxVal: Float32 = 0.0
-        var secondMaxVal: Float32 = 0.0
         var val: Float32 = 0.0
         var maxIndex: Int = 0
-        var secondMaxIndex: Int = 0
-        
+
         for x in 0..<self.outputImageWidth {
             for y in 0..<self.outputImageHeight {
                 maxIndex = 0
-                secondMaxIndex = 0
                 maxVal = 0.0
-                secondMaxVal = 0.0
                 // find label with highest confidence level for that pixel
                 for z in 0..<self.outputClassCount {
                     val = outputArray[coordinateToIndex(x: x, y: y, z: z)]
                     if val > maxVal {
                         maxVal = val
                         maxIndex = z
-                    } else if val > secondMaxVal {
-                        secondMaxVal = val
-                        secondMaxIndex = z
                     }
                 }
+                // creating default segmentation map
                 segmentationMap[x][y] = maxIndex
                 classList.insert(maxIndex)
-                
+
                 // Lookup the color legend for the class.
                 // Using modulo to reuse colors on segmentation model with large number of classes.
                 let legendColor = Constants.legendColorList[maxIndex % Constants.legendColorList.count]
                 segmentationImagePixels[x * self.outputImageHeight + y] = legendColor
+
+                // creating confidence segmentation map.
+                let confidenceIndex: Int
+                switch maxVal {
+                case 0.91...1.0:
+                    confidenceIndex = 0
+                case 0.81...0.90:
+                    confidenceIndex = 1
+                case 0.71...0.80:
+                    confidenceIndex = 2
+                case 0.61...0.70:
+                    confidenceIndex = 3
+                case 0.51...0.60:
+                    confidenceIndex = 4
+                case 0.41...0.50:
+                    confidenceIndex = 5
+                case 0.31...0.40:
+                    confidenceIndex = 6
+                case 0.21...0.30:
+                    confidenceIndex = 7
+                case 0.11...0.20:
+                    confidenceIndex = 8
+                case 0.01...0.10:
+                    confidenceIndex = 9
+                default:
+                    confidenceIndex = 0
+                }
+
+                confidenceSegmentationMap[x][y] = confidenceIndex
+                confidenceClassList.insert(confidenceIndex)
+                let confidenceColour = Constants.confidenceColorList[confidenceIndex % Constants.confidenceColorList.count]
+                confidenceSegmentationImagePixels[x * self.outputImageHeight + y] = confidenceColour
+
             }
         }
-        
-        return (segmentationMap, segmentationImagePixels, classList)
+
+        return (segmentationMap,
+                segmentationImagePixels,
+                classList,
+                confidenceSegmentationMap,
+                confidenceSegmentationImagePixels,
+                confidenceClassList)
     }
     
     /// Convert 3-dimension index (image_width x image_height x class_count) to 1-dimension index
@@ -223,13 +283,46 @@ class Segmentator {
         }
         return colorLegend
     }
+    
+    /// Look up colours to visualise confidence mask.
+    private func confidenceClassListToColorLegend(classList: Set<Int>) -> [String: UIColor] {
+        var colorLegend: [String: UIColor] = [:]
+        classList.forEach { classIndex in
+            // Look up the color legend for the class.
+            // Using modulo to reuse colors on segmentation model with large number of classes.
+            let color = Constants.confidenceColorList[classIndex % Constants.confidenceColorList.count]
+            
+            // Convert the color from sRGB UInt32 representation to UIColor.
+            let a = CGFloat((color & 0xFF00_0000) >> 24) / 255.0
+            let r = CGFloat((color & 0x00FF_0000) >> 16) / 255.0
+            let g = CGFloat((color & 0x0000_FF00) >> 8) / 255.0
+            let b = CGFloat(color & 0x0000_00FF) / 255.0
+            
+            colorLegend[Constants.confidenceLabels[classIndex]] = UIColor(red: r, green: g, blue: b, alpha: a)
+        }
+        return colorLegend
+    }
 }
 
+//// segmentation results for default mask and second highest confidence mask
+//struct SegmentationResults {
+//    var originalImage: UIImage
+//    var segmentedImage: UIImage
+//    var overlayImage: UIImage
+//    var colourLegend: [String: UIColor]
+//    var secondSegmentedImage: UIImage
+//    var secondOverlayImage: UIImage
+//    var secondColourLegend: [String: UIColor]
+//}
+
+ //segmentation results for default mask and confidence mask
 struct SegmentationResults {
     var originalImage: UIImage
     var segmentedImage: UIImage
     var overlayImage: UIImage
     var colourLegend: [String: UIColor]
+    var confidenceSegmentedImage: UIImage
+    var confidenceColourLegend: [String: UIColor]
 }
 
 enum SegmentationError: Error {
@@ -254,5 +347,31 @@ struct Constants {
         0xFF1E_90FF, // Blue
         0xFFAA_6E28, // Brown
         0xFFFF_FF00 // Yellow
+    ]
+    
+    static let confidenceColorList: [UInt32] = [
+        0xFF24_6590, // 91% - 100%
+        0xFF24_6590, // 81% - 90%
+        0xFF24_6590, // 71% - 80%
+        0xFF3D_ACF7, // 61% - 70%
+        0xFF79_D6F9, // 51% - 60%
+        0xFFE8_7AA4, // 41% - 50%
+        0xFFF9_D98C, // 31% - 40%
+        0xFFB8_E233, // 21% - 30%
+        0xFFB8_E233, // 11% - 20%
+        0xFFB8_E233 // 1% - 10%
+    ]
+    
+    static let confidenceLabels: [String] = [
+        "91%-100%",
+        "81%-90%",
+        "71%-80%",
+        "61%-70%",
+        "51%-60%",
+        "41%-50%",
+        "31%-40%",
+        "21%-30%",
+        "11%-20%",
+        "1%-10%"
     ]
 }

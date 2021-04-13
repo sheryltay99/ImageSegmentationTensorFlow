@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var segmentationStatusLabel: UILabel!
     @IBOutlet weak var photoCameraButton: UIBarButtonItem!
     @IBOutlet weak var legendLabel: UILabel!
+    @IBOutlet weak var segmentationSwitch: UISwitch!
     
     let imagePicker = UIImagePickerController()
     var isCameraAvailable = false
@@ -37,6 +38,8 @@ class ViewController: UIViewController {
         }
         
         // Do any additional setup after loading the view.
+        segmentationSwitch.isOn = false
+        
         guard let segmentator = Segmentator.getInstance() else {
             self.segmentationStatusLabel.text = "Unable to load segmentator."
             return
@@ -46,6 +49,13 @@ class ViewController: UIViewController {
         //run default segmentation.
         self.segmentationStatusLabel.text = "Running inference..."
         showDemoSegmentation()
+    }
+    
+    @IBAction func onSwitchSegmentation(_ sender: UISwitch) {
+        guard let segmentedResult = segmentationResult else { return }
+        showClassLegend(segmentedResult)
+        self.segmentedControl.selectedSegmentIndex = 1
+        onSegmentChanged(self.segmentedControl)
     }
     
     @IBAction func onTapPhotoLibrary(_ sender: UIBarButtonItem) {
@@ -60,11 +70,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onSegmentChanged(_ sender: UISegmentedControl) {
+        let isConfidenceSegmentation = self.segmentationSwitch.isOn
+        
         switch sender.selectedSegmentIndex {
         case 0: //show input image
             self.imageView.image = segmentationInput
         case 1: //show segmented image
-            self.imageView.image = segmentationResult?.segmentedImage
+            self.imageView.image = isConfidenceSegmentation ? segmentationResult?.confidenceSegmentedImage : segmentationResult?.segmentedImage
         case 2: //show overlay image
             self.imageView.image = segmentationResult?.overlayImage
         default:
@@ -74,7 +86,7 @@ class ViewController: UIViewController {
     
     /// Demo image segmentation with a bundled image.
     private func showDemoSegmentation() {
-        if let filePath = Bundle.main.path(forResource: "10566", ofType: "png"),
+        if let filePath = Bundle.main.path(forResource: "10020", ofType: "png"),
            let image = UIImage(contentsOfFile: filePath)
         {
             runSegmentation(image: image)
@@ -125,9 +137,16 @@ class ViewController: UIViewController {
     /// Show color legend of each class found in the image.
     private func showClassLegend(_ segmentationResult: SegmentationResults) {
         let legendText = NSMutableAttributedString(string: "Legend: ")
+        let segmentationColourLegend: [String: UIColor]
+        
+        if self.segmentationSwitch.isOn {
+            segmentationColourLegend = segmentationResult.confidenceColourLegend
+        } else {
+            segmentationColourLegend = segmentationResult.colourLegend
+        }
         
         // Loop through the classes founded in the image.
-        segmentationResult.colourLegend.forEach { (className, color) in
+        segmentationColourLegend.forEach { (className, color) in
             // If the color legend is light, use black text font. If not, use white text font.
             let textColor = color.isLight() ?? true ? UIColor.black : UIColor.white
             
@@ -145,7 +164,7 @@ class ViewController: UIViewController {
         }
         
         // Show the class legends on the screen.
-        legendLabel.attributedText = legendText
+        self.legendLabel.attributedText = legendText
     }
 
 
