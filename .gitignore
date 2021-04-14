@@ -1,0 +1,40 @@
+contents.xcworkspacedata
+IDEWorkspaceChecks.plist
+Pods/Manifest.lock
+Pods/Pods.xcodeproj/project.pbxproj
+Pods/Pods.xcodeproj/xcuserdata/sheryltay.xcuserdatad/xcschemes/Pods-ImageSegmentationSample.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/sheryltay.xcuserdatad/xcschemes/TensorFlowLiteC.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/sheryltay.xcuserdatad/xcschemes/TensorFlowLiteSwift.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/sheryltay.xcuserdatad/xcschemes/xcschememanagement.plist
+Pods/Target Support Files/Pods-ImageSegmentationSample/Pods-ImageSegmentationSample-acknowledgements.markdown
+Pods/Target Support Files/Pods-ImageSegmentationSample/Pods-ImageSegmentationSample-acknowledgements.plist
+Pods/Target Support Files/Pods-ImageSegmentationSample/Pods-ImageSegmentationSample-dummy.m
+Pods/Target Support Files/Pods-ImageSegmentationSample/Pods-ImageSegmentationSample-Info.plist
+Pods/Target Support Files/Pods-ImageSegmentationSample/Pods-ImageSegmentationSample-umbrella.h
+Pods/Target Support Files/Pods-ImageSegmentationSample/Pods-ImageSegmentationSample.debug.xcconfig
+Pods/Target Support Files/Pods-ImageSegmentationSample/Pods-ImageSegmentationSample.modulemap
+Pods/Target Support Files/Pods-ImageSegmentationSample/Pods-ImageSegmentationSample.release.xcconfig
+Pods/Target Support Files/TensorFlowLiteC/TensorFlowLiteC.debug.xcconfig
+Pods/Target Support Files/TensorFlowLiteC/TensorFlowLiteC.release.xcconfig
+Pods/Target Support Files/TensorFlowLiteSwift/TensorFlowLiteSwift-dummy.m
+Pods/Target Support Files/TensorFlowLiteSwift/TensorFlowLiteSwift-Info.plist
+Pods/Target Support Files/TensorFlowLiteSwift/TensorFlowLiteSwift-prefix.pch
+Pods/Target Support Files/TensorFlowLiteSwift/TensorFlowLiteSwift-umbrella.h
+Pods/Target Support Files/TensorFlowLiteSwift/TensorFlowLiteSwift.debug.xcconfig
+Pods/Target Support Files/TensorFlowLiteSwift/TensorFlowLiteSwift.modulemap
+Pods/Target Support Files/TensorFlowLiteSwift/TensorFlowLiteSwift.release.xcconfig
+Pods/TensorFlowLiteC/Frameworks/TensorFlowLiteC.framework/TensorFlowLiteC
+Pods/TensorFlowLiteC/Frameworks/TensorFlowLiteC.framework/Headers/c_api.h
+Pods/TensorFlowLiteC/Frameworks/TensorFlowLiteC.framework/Headers/common.h
+Pods/TensorFlowLiteC/Frameworks/TensorFlowLiteC.framework/Headers/TensorFlowLiteC.h
+Pods/TensorFlowLiteC/Frameworks/TensorFlowLiteC.framework/Headers/xnnpack_delegate.h
+Pods/TensorFlowLiteC/Frameworks/TensorFlowLiteC.framework/Modules/module.modulemap
+Pods/TensorFlowLiteSwift/LICENSE
+Pods/TensorFlowLiteSwift/README.md
+Pods/TensorFlowLiteSwift/tensorflow/lite/experimental/swift/Sources/Delegate.swift
+Pods/TensorFlowLiteSwift/tensorflow/lite/experimental/swift/Sources/Interpreter.swift
+Pods/TensorFlowLiteSwift/tensorflow/lite/experimental/swift/Sources/InterpreterError.swift
+Pods/TensorFlowLiteSwift/tensorflow/lite/experimental/swift/Sources/Model.swift
+Pods/TensorFlowLiteSwift/tensorflow/lite/experimental/swift/Sources/QuantizationParameters.swift
+Pods/TensorFlowLiteSwift/tensorflow/lite/experimental/swift/Sources/Tensor.swift
+Pods/TensorFlowLiteSwift/tensorflow/lite/experimental/swift/Sources/TensorFlowLite.swift
