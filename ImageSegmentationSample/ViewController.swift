@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var segmentationStatusLabel: UILabel!
@@ -22,6 +22,10 @@ class ViewController: UIViewController {
     var segmentator: Segmentator?
     var segmentationResult: SegmentationResults?
     var segmentationInput: UIImage?
+    
+    var count: Int = 0
+    var startTime: Date = Date()
+    var now: Date = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,14 +90,32 @@ class ViewController: UIViewController {
     
     /// Demo image segmentation with a bundled image.
     private func showDemoSegmentation() {
-        if let filePath = Bundle.main.path(forResource: "10020", ofType: "png"),
-           let image = UIImage(contentsOfFile: filePath)
+//        if let filePath = Bundle.main.path(forResource: "10020", ofType: "png"),
+//           let image = UIImage(contentsOfFile: filePath)
+//        {
+//            self.startTime = Date()
+//            self.now = self.startTime
+//            print("start time: \(self.startTime)")
+//            runSegmentation(image: image)
+//        }
+        if let firstFilePath = Bundle.main.path(forResource: "10020", ofType: "png"),
+           let firstImage = UIImage(contentsOfFile: firstFilePath),
+           let secondFilePath = Bundle.main.path(forResource: "10005", ofType: "png"),
+           let secondImage = UIImage(contentsOfFile: secondFilePath)
         {
-            runSegmentation(image: image)
+            for i in 0..<100 {
+                print("executing for index \(i) at \(Date())")
+                if i % 2 == 0 {
+                    runSegmentation(image: firstImage, index: i)
+                } else {
+                    runSegmentation(image: secondImage, index: i)
+                }
+                print("did execution for index \(i) at \(Date())")
+            }
         }
     }
     
-    func runSegmentation(image: UIImage) {
+    func runSegmentation(image: UIImage, index: Int) {
         // Ensuring image orientation is upright.
         guard let transformedImage = image.transformOrientationToUp() else {
             print("Unable to fix image orientation.")
@@ -128,11 +150,43 @@ class ViewController: UIViewController {
                 
                 // add to legend
                 self.showClassLegend(segmentationResult)
+                print("Segmentation done successfully for index \(index) at \(Date())")
             case let .failure(error):
                 self.segmentationStatusLabel.text = error.localizedDescription
+                print("Segmentation failed for index \(index) at \(Date())")
             }
         })
+        
+//        let tempNow = Date()
+//        let timeInterval = tempNow.timeIntervalSince(self.now)
+//        print("Time taken for index \(self.count): \(timeInterval)")
+//        self.now = tempNow
+//        print("Current time for index \(self.count): \(self.now)")
+//        runNextSegmentation()
     }
+    
+//    func runNextSegmentation() {
+//        guard self.count < 100 else {
+//            let timeTaken = self.now.timeIntervalSince(self.startTime)
+//            print("Total time to run 500 iterations: \(timeTaken)")
+//            return
+//        }
+//        if let firstFilePath = Bundle.main.path(forResource: "10020", ofType: "png"),
+//           let firstImage = UIImage(contentsOfFile: firstFilePath),
+//           let secondFilePath = Bundle.main.path(forResource: "10005", ofType: "png"),
+//           let secondImage = UIImage(contentsOfFile: secondFilePath)
+//        {
+//            print("executing for index \(count) at \(Date())")
+//            if count % 2 == 0 {
+//                count += 1
+//                runSegmentation(image: firstImage)
+//            } else {
+//                count += 1
+//                runSegmentation(image: secondImage)
+//            }
+//            print("did execution for index \(count) at \(Date())")
+//        }
+//    }
     
     /// Show color legend of each class found in the image.
     private func showClassLegend(_ segmentationResult: SegmentationResults) {
@@ -166,8 +220,8 @@ class ViewController: UIViewController {
         // Show the class legends on the screen.
         self.legendLabel.attributedText = legendText
     }
-
-
+    
+    
 }
 
 // MARK: UIImagePicker delegate methods
@@ -177,7 +231,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
             self.segmentationStatusLabel.text = "Unable to select photo from camera or photo library."
             return
         }
-        self.runSegmentation(image: image)
+//        self.runSegmentation(image: image)
         dismiss(animated: true, completion: nil)
     }
 }

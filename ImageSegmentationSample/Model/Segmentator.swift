@@ -333,7 +333,7 @@ enum SegmentationError: Error {
 
 // MARK: Constants
 struct Constants {
-    static let modelFileName = "model"
+    static let modelFileName = "mobileunet_model"
     static let modelFileExtension = "tflite"
     
     static let labelsFileName = "deeplab"

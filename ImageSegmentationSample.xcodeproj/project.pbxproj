@@ -34,6 +34,7 @@
 		217D702226020AB000CFA89F /* 10038.png in Resources */ = {isa = PBXBuildFile; fileRef = 217D701226020AAF00CFA89F /* 10038.png */; };
 		217D702326020AB000CFA89F /* 10005.png in Resources */ = {isa = PBXBuildFile; fileRef = 217D701326020AAF00CFA89F /* 10005.png */; };
 		218EAB5D261EE75F00CFD17C /* 10002.png in Resources */ = {isa = PBXBuildFile; fileRef = 218EAB5C261EE75F00CFD17C /* 10002.png */; };
+		219592F9263BC173007AF858 /* mobileunet_model.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 219592F8263BC173007AF858 /* mobileunet_model.tflite */; };
 		80CFBB56FCDB69B13DECBDA0 /* Pods_ImageSegmentationSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF5C8338C45A7C159ED7359B /* Pods_ImageSegmentationSample.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		217D701226020AAF00CFA89F /* 10038.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10038.png; sourceTree = "<group>"; };
 		217D701326020AAF00CFA89F /* 10005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10005.png; sourceTree = "<group>"; };
 		218EAB5C261EE75F00CFD17C /* 10002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10002.png; sourceTree = "<group>"; };
+		219592F8263BC173007AF858 /* mobileunet_model.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobileunet_model.tflite; sourceTree = "<group>"; };
 		9EB3A24393D7F7C361ABA244 /* Pods-ImageSegmentationSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageSegmentationSample.debug.xcconfig"; path = "Target Support Files/Pods-ImageSegmentationSample/Pods-ImageSegmentationSample.debug.xcconfig"; sourceTree = "<group>"; };
 		D67F373F4CEFDBE59BAF9DDF /* Pods-ImageSegmentationSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageSegmentationSample.release.xcconfig"; path = "Target Support Files/Pods-ImageSegmentationSample/Pods-ImageSegmentationSample.release.xcconfig"; sourceTree = "<group>"; };
 		EF5C8338C45A7C159ED7359B /* Pods_ImageSegmentationSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImageSegmentationSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +127,7 @@
 			children = (
 				217D6FF425FEFC9900CFA89F /* deeplab.json */,
 				217D6FF525FEFC9A00CFA89F /* model.tflite */,
+				219592F8263BC173007AF858 /* mobileunet_model.tflite */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				217D6FE725FEEFB500CFA89F /* LaunchScreen.storyboard in Resources */,
 				217D6FF625FEFC9A00CFA89F /* deeplab.json in Resources */,
 				217D701626020AB000CFA89F /* 10020.png in Resources */,
+				219592F9263BC173007AF858 /* mobileunet_model.tflite in Resources */,
 				217D6FE425FEEFB500CFA89F /* Assets.xcassets in Resources */,
 				217D701B26020AB000CFA89F /* 10025.png in Resources */,
 				217D701E26020AB000CFA89F /* 10028.png in Resources */,
