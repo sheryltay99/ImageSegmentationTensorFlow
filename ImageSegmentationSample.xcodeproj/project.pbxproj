@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		217BECA7268439250058FAF8 /* SegmentationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217BECA6268439250058FAF8 /* SegmentationMap.swift */; };
+		217BECAA2684394A0058FAF8 /* TissueLabelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217BECA92684394A0058FAF8 /* TissueLabelType.swift */; };
+		217BECAD2684397B0058FAF8 /* ConfidenceLabelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217BECAC2684397B0058FAF8 /* ConfidenceLabelType.swift */; };
+		217BECB0268439960058FAF8 /* ModelOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217BECAF268439960058FAF8 /* ModelOutput.swift */; };
+		217BECB3268439CF0058FAF8 /* SegmentationResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217BECB2268439CF0058FAF8 /* SegmentationResults.swift */; };
+		217BECB6268439E50058FAF8 /* SegmentationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217BECB5268439E50058FAF8 /* SegmentationError.swift */; };
 		217D6FDB25FEEFB000CFA89F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217D6FDA25FEEFB000CFA89F /* AppDelegate.swift */; };
 		217D6FDD25FEEFB000CFA89F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217D6FDC25FEEFB000CFA89F /* SceneDelegate.swift */; };
 		217D6FDF25FEEFB000CFA89F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217D6FDE25FEEFB000CFA89F /* ViewController.swift */; };
@@ -39,6 +45,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		217BECA6268439250058FAF8 /* SegmentationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentationMap.swift; sourceTree = "<group>"; };
+		217BECA92684394A0058FAF8 /* TissueLabelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TissueLabelType.swift; sourceTree = "<group>"; };
+		217BECAC2684397B0058FAF8 /* ConfidenceLabelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfidenceLabelType.swift; sourceTree = "<group>"; };
+		217BECAF268439960058FAF8 /* ModelOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelOutput.swift; sourceTree = "<group>"; };
+		217BECB2268439CF0058FAF8 /* SegmentationResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentationResults.swift; sourceTree = "<group>"; };
+		217BECB5268439E50058FAF8 /* SegmentationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentationError.swift; sourceTree = "<group>"; };
 		217D6FD725FEEFB000CFA89F /* ImageSegmentationSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageSegmentationSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		217D6FDA25FEEFB000CFA89F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		217D6FDC25FEEFB000CFA89F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,7 +124,13 @@
 				217D6FF325FEFC6300CFA89F /* Model */,
 				217D6FDE25FEEFB000CFA89F /* ViewController.swift */,
 				217D6FF925FEFCD600CFA89F /* Segmentator.swift */,
+				217BECB2268439CF0058FAF8 /* SegmentationResults.swift */,
+				217BECB5268439E50058FAF8 /* SegmentationError.swift */,
+				217BECA6268439250058FAF8 /* SegmentationMap.swift */,
+				217BECAF268439960058FAF8 /* ModelOutput.swift */,
+				217BECA92684394A0058FAF8 /* TissueLabelType.swift */,
 				217D6FFD25FF343900CFA89F /* Extensions.swift */,
+				217BECAC2684397B0058FAF8 /* ConfidenceLabelType.swift */,
 				217D6FE025FEEFB000CFA89F /* Main.storyboard */,
 				217D6FE325FEEFB500CFA89F /* Assets.xcassets */,
 				217D6FE525FEEFB500CFA89F /* LaunchScreen.storyboard */,
@@ -289,10 +307,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				217BECA7268439250058FAF8 /* SegmentationMap.swift in Sources */,
 				217D6FFE25FF343900CFA89F /* Extensions.swift in Sources */,
+				217BECB3268439CF0058FAF8 /* SegmentationResults.swift in Sources */,
+				217BECB6268439E50058FAF8 /* SegmentationError.swift in Sources */,
 				217D6FDF25FEEFB000CFA89F /* ViewController.swift in Sources */,
 				217D6FFA25FEFCD600CFA89F /* Segmentator.swift in Sources */,
+				217BECAD2684397B0058FAF8 /* ConfidenceLabelType.swift in Sources */,
+				217BECAA2684394A0058FAF8 /* TissueLabelType.swift in Sources */,
 				217D6FDB25FEEFB000CFA89F /* AppDelegate.swift in Sources */,
+				217BECB0268439960058FAF8 /* ModelOutput.swift in Sources */,
 				217D6FDD25FEEFB000CFA89F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

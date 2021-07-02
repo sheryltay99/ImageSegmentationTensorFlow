@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import os.log
 
 // MARK: UIImage extensions
 extension UIImage {
@@ -224,6 +225,17 @@ extension UIColor {
 
     return (brightness > threshold)
   }
+    
+    var asUInt32: UInt32 {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        let value: UInt32 = UInt32(alpha * 255) << 24
+            + UInt32(red   * 255) << 16
+            + UInt32(green * 255) << 8
+            + UInt32(blue  * 255)
+        
+        return value
+    }
 }
 
 // MARK: - Constants
@@ -233,4 +245,10 @@ private enum Constant {
     static let alphaComponent = (baseOffset: 4, moduloRemainder: 3)
     static let imageMean: Float32 = 127.5
     static let imageStd: Float32 = 127.5
+}
+
+extension OSLog {
+    private static let subsystem = Bundle.main.bundleIdentifier ?? "com.tetsuyuhealthcare.TissueAI"
+    
+    static let aisgtl = OSLog(subsystem: subsystem, category: "aisgTL")
 }

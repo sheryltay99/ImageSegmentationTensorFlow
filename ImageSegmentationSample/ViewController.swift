@@ -90,32 +90,49 @@ class ViewController: UIViewController {
     
     /// Demo image segmentation with a bundled image.
     private func showDemoSegmentation() {
-//        if let filePath = Bundle.main.path(forResource: "10020", ofType: "png"),
-//           let image = UIImage(contentsOfFile: filePath)
+        if let filePath = Bundle.main.path(forResource: "10020", ofType: "png"),
+           let image = UIImage(contentsOfFile: filePath)
+        {
+            self.startTime = Date()
+            self.now = self.startTime
+            print("start time: \(self.startTime)")
+            runSegmentation(image: image)
+        }
+//        if let firstFilePath = Bundle.main.path(forResource: "10020", ofType: "png"),
+//           let firstImage = UIImage(contentsOfFile: firstFilePath),
+//           let secondFilePath = Bundle.main.path(forResource: "10005", ofType: "png"),
+//           let secondImage = UIImage(contentsOfFile: secondFilePath)
+//        {
+//            for i in 0..<100 {
+//                print("executing for index \(i) at \(Date())")
+//                if i % 2 == 0 {
+//                    runSegmentation(image: firstImage, index: i)
+//                } else {
+//                    runSegmentation(image: secondImage, index: i)
+//                }
+//                print("did execution for index \(i) at \(Date())")
+//            }
+//        }
+//        if let firstFilePath = Bundle.main.path(forResource: "10020", ofType: "png"),
+//           let firstImage = UIImage(contentsOfFile: firstFilePath),
+//           let secondFilePath = Bundle.main.path(forResource: "10005", ofType: "png"),
+//           let secondImage = UIImage(contentsOfFile: secondFilePath)
 //        {
 //            self.startTime = Date()
 //            self.now = self.startTime
 //            print("start time: \(self.startTime)")
-//            runSegmentation(image: image)
+//            for i in 0..<50 {
+//                self.count = i
+//                if i % 2 == 0 {
+//                    runSegmentation(image: firstImage)
+//                } else {
+//                    runSegmentation(image: secondImage)
+//                }
+//            }
 //        }
-        if let firstFilePath = Bundle.main.path(forResource: "10020", ofType: "png"),
-           let firstImage = UIImage(contentsOfFile: firstFilePath),
-           let secondFilePath = Bundle.main.path(forResource: "10005", ofType: "png"),
-           let secondImage = UIImage(contentsOfFile: secondFilePath)
-        {
-            for i in 0..<100 {
-                print("executing for index \(i) at \(Date())")
-                if i % 2 == 0 {
-                    runSegmentation(image: firstImage, index: i)
-                } else {
-                    runSegmentation(image: secondImage, index: i)
-                }
-                print("did execution for index \(i) at \(Date())")
-            }
-        }
     }
     
-    func runSegmentation(image: UIImage, index: Int) {
+    func runSegmentation(image: UIImage) {
         // Ensuring image orientation is upright.
         guard let transformedImage = image.transformOrientationToUp() else {
             print("Unable to fix image orientation.")
@@ -150,17 +167,15 @@ class ViewController: UIViewController {
                 
                 // add to legend
                 self.showClassLegend(segmentationResult)
-                print("Segmentation done successfully for index \(index) at \(Date())")
             case let .failure(error):
                 self.segmentationStatusLabel.text = error.localizedDescription
-                print("Segmentation failed for index \(index) at \(Date())")
             }
         })
         
-//        let tempNow = Date()
-//        let timeInterval = tempNow.timeIntervalSince(self.now)
-//        print("Time taken for index \(self.count): \(timeInterval)")
-//        self.now = tempNow
+        let tempNow = Date()
+        let timeInterval = tempNow.timeIntervalSince(self.now)
+        print("Time taken for index \(self.count): \(timeInterval)")
+        self.now = tempNow
 //        print("Current time for index \(self.count): \(self.now)")
 //        runNextSegmentation()
     }
@@ -194,9 +209,9 @@ class ViewController: UIViewController {
         let segmentationColourLegend: [String: UIColor]
         
         if self.segmentationSwitch.isOn {
-            segmentationColourLegend = segmentationResult.confidenceColourLegend
+            segmentationColourLegend = segmentationResult.confidenceColorLegend
         } else {
-            segmentationColourLegend = segmentationResult.colourLegend
+            segmentationColourLegend = segmentationResult.colorLegend
         }
         
         // Loop through the classes founded in the image.
