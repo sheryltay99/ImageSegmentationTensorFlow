@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		213D78BF268EA1FA002E3D93 /* Segmentator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D78BE268EA1F9002E3D93 /* Segmentator.swift */; };
 		217BECA7268439250058FAF8 /* SegmentationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217BECA6268439250058FAF8 /* SegmentationMap.swift */; };
 		217BECAA2684394A0058FAF8 /* TissueLabelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217BECA92684394A0058FAF8 /* TissueLabelType.swift */; };
 		217BECAD2684397B0058FAF8 /* ConfidenceLabelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217BECAC2684397B0058FAF8 /* ConfidenceLabelType.swift */; };
@@ -21,7 +22,6 @@
 		217D6FE725FEEFB500CFA89F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 217D6FE525FEEFB500CFA89F /* LaunchScreen.storyboard */; };
 		217D6FF625FEFC9A00CFA89F /* deeplab.json in Resources */ = {isa = PBXBuildFile; fileRef = 217D6FF425FEFC9900CFA89F /* deeplab.json */; };
 		217D6FF725FEFC9A00CFA89F /* model.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 217D6FF525FEFC9A00CFA89F /* model.tflite */; };
-		217D6FFA25FEFCD600CFA89F /* Segmentator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217D6FF925FEFCD600CFA89F /* Segmentator.swift */; };
 		217D6FFE25FF343900CFA89F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217D6FFD25FF343900CFA89F /* Extensions.swift */; };
 		217D701426020AAF00CFA89F /* 10643.png in Resources */ = {isa = PBXBuildFile; fileRef = 217D700426020AAF00CFA89F /* 10643.png */; };
 		217D701526020AB000CFA89F /* 10081a.png in Resources */ = {isa = PBXBuildFile; fileRef = 217D700526020AAF00CFA89F /* 10081a.png */; };
@@ -45,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		213D78BE268EA1F9002E3D93 /* Segmentator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segmentator.swift; sourceTree = "<group>"; };
 		217BECA6268439250058FAF8 /* SegmentationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentationMap.swift; sourceTree = "<group>"; };
 		217BECA92684394A0058FAF8 /* TissueLabelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TissueLabelType.swift; sourceTree = "<group>"; };
 		217BECAC2684397B0058FAF8 /* ConfidenceLabelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfidenceLabelType.swift; sourceTree = "<group>"; };
@@ -61,7 +62,6 @@
 		217D6FE825FEEFB500CFA89F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		217D6FF425FEFC9900CFA89F /* deeplab.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deeplab.json; sourceTree = "<group>"; };
 		217D6FF525FEFC9A00CFA89F /* model.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = model.tflite; sourceTree = "<group>"; };
-		217D6FF925FEFCD600CFA89F /* Segmentator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Segmentator.swift; path = Model/Segmentator.swift; sourceTree = "<group>"; };
 		217D6FFD25FF343900CFA89F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		217D700426020AAF00CFA89F /* 10643.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10643.png; sourceTree = "<group>"; };
 		217D700526020AAF00CFA89F /* 10081a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10081a.png; sourceTree = "<group>"; };
@@ -123,12 +123,12 @@
 				217D6FDC25FEEFB000CFA89F /* SceneDelegate.swift */,
 				217D6FF325FEFC6300CFA89F /* Model */,
 				217D6FDE25FEEFB000CFA89F /* ViewController.swift */,
-				217D6FF925FEFCD600CFA89F /* Segmentator.swift */,
 				217BECB2268439CF0058FAF8 /* SegmentationResults.swift */,
 				217BECB5268439E50058FAF8 /* SegmentationError.swift */,
 				217BECA6268439250058FAF8 /* SegmentationMap.swift */,
 				217BECAF268439960058FAF8 /* ModelOutput.swift */,
 				217BECA92684394A0058FAF8 /* TissueLabelType.swift */,
+				213D78BE268EA1F9002E3D93 /* Segmentator.swift */,
 				217D6FFD25FF343900CFA89F /* Extensions.swift */,
 				217BECAC2684397B0058FAF8 /* ConfidenceLabelType.swift */,
 				217D6FE025FEEFB000CFA89F /* Main.storyboard */,
@@ -311,8 +311,8 @@
 				217D6FFE25FF343900CFA89F /* Extensions.swift in Sources */,
 				217BECB3268439CF0058FAF8 /* SegmentationResults.swift in Sources */,
 				217BECB6268439E50058FAF8 /* SegmentationError.swift in Sources */,
+				213D78BF268EA1FA002E3D93 /* Segmentator.swift in Sources */,
 				217D6FDF25FEEFB000CFA89F /* ViewController.swift in Sources */,
-				217D6FFA25FEFCD600CFA89F /* Segmentator.swift in Sources */,
 				217BECAD2684397B0058FAF8 /* ConfidenceLabelType.swift in Sources */,
 				217BECAA2684394A0058FAF8 /* TissueLabelType.swift in Sources */,
 				217D6FDB25FEEFB000CFA89F /* AppDelegate.swift in Sources */,
