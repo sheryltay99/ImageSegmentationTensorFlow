@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     var count: Int = 0
     var startTime: Date = Date()
     var now: Date = Date()
+    var totalTime: Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,14 +91,14 @@ class ViewController: UIViewController {
     
     /// Demo image segmentation with a bundled image.
     private func showDemoSegmentation() {
-        if let filePath = Bundle.main.path(forResource: "10020", ofType: "png"),
-           let image = UIImage(contentsOfFile: filePath)
-        {
-            self.startTime = Date()
-            self.now = self.startTime
-            print("start time: \(self.startTime)")
-            runSegmentation(image: image)
-        }
+//        if let filePath = Bundle.main.path(forResource: "10020", ofType: "png"),
+//           let image = UIImage(contentsOfFile: filePath)
+//        {
+//            self.startTime = Date()
+//            self.now = self.startTime
+//            print("start time: \(self.startTime)")
+//            runSegmentation(image: image)
+//        }
 //        if let firstFilePath = Bundle.main.path(forResource: "10020", ofType: "png"),
 //           let firstImage = UIImage(contentsOfFile: firstFilePath),
 //           let secondFilePath = Bundle.main.path(forResource: "10005", ofType: "png"),
@@ -113,23 +114,24 @@ class ViewController: UIViewController {
 //                print("did execution for index \(i) at \(Date())")
 //            }
 //        }
-//        if let firstFilePath = Bundle.main.path(forResource: "10020", ofType: "png"),
-//           let firstImage = UIImage(contentsOfFile: firstFilePath),
-//           let secondFilePath = Bundle.main.path(forResource: "10005", ofType: "png"),
-//           let secondImage = UIImage(contentsOfFile: secondFilePath)
-//        {
-//            self.startTime = Date()
-//            self.now = self.startTime
-//            print("start time: \(self.startTime)")
-//            for i in 0..<50 {
-//                self.count = i
-//                if i % 2 == 0 {
-//                    runSegmentation(image: firstImage)
-//                } else {
-//                    runSegmentation(image: secondImage)
-//                }
-//            }
-//        }
+        if let firstFilePath = Bundle.main.path(forResource: "10020", ofType: "png"),
+           let firstImage = UIImage(contentsOfFile: firstFilePath),
+           let secondFilePath = Bundle.main.path(forResource: "10005", ofType: "png"),
+           let secondImage = UIImage(contentsOfFile: secondFilePath)
+        {
+            self.startTime = Date()
+            self.now = self.startTime
+            print("start time: \(self.startTime)")
+            for i in 0..<50 {
+                self.count = i
+                if i % 2 == 0 {
+                    runSegmentation(image: firstImage)
+                } else {
+                    runSegmentation(image: secondImage)
+                }
+            }
+            print("Average time taken for 1 iteration: \(totalTime / 50)")
+        }
     }
     
     func runSegmentation(image: UIImage) {
@@ -175,6 +177,7 @@ class ViewController: UIViewController {
         let tempNow = Date()
         let timeInterval = tempNow.timeIntervalSince(self.now)
         print("Time taken for index \(self.count): \(timeInterval)")
+        totalTime += timeInterval
         self.now = tempNow
 //        print("Current time for index \(self.count): \(self.now)")
 //        runNextSegmentation()

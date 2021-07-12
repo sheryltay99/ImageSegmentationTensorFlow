@@ -6,6 +6,7 @@ target 'ImageSegmentationSample' do
   use_frameworks!
 
   # Pods for ImageSegmentationSample
-  pod 'TensorFlowLiteSwift'
+  # pod 'TensorFlowLiteSwift'
+  pod 'TensorFlowLiteSwift/CoreML', '~> 2.4.0'
 
 end

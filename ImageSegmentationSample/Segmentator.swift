@@ -23,7 +23,7 @@ class Segmentator {
     private var outputClassCount: Int = 0
     private var outputArray: [Float32]?
     
-    static let modelFileName = "mobileunet_model"
+    static let modelFileName = "stage1_fpn-effnetb2_float16"
     static let modelFileExtension = "tflite"
     
     /// Create instance of TFLiteSegmenter class.
